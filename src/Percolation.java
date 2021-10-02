@@ -1,3 +1,4 @@
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
@@ -66,10 +67,10 @@ public class Percolation {
         while (!percolation.percolates()) {
             int row = StdRandom.uniform(n) + 1;
             int col = StdRandom.uniform(n) + 1;
-            System.out.println("opening row=" + row + ",col=" + col);
-            System.out.println("num of open sites: " + percolation.numberOfOpenSites());
+            StdOut.println("opening row=" + row + ",col=" + col);
+            StdOut.println("num of open sites: " + percolation.numberOfOpenSites());
             percolation.open(row, col);
         }
-        System.out.println("percolation threshold: " + n * n / percolation.numberOfOpenSites());
+        StdOut.println("percolation threshold: " + n * n / percolation.numberOfOpenSites());
     }
 }

@@ -1,8 +1,9 @@
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
-    private double[] thresholds;
+    private final double[] thresholds;
     private final int trials;
 
     // perform independent trials on an n-by-n grid
@@ -14,12 +15,9 @@ public class PercolationStats {
             while (!percolation.percolates()) {
                 int row = StdRandom.uniform(n) + 1;
                 int col = StdRandom.uniform(n) + 1;
-                System.out.println("opening row=" + row + ",col=" + col);
-                System.out.println("num of open sites: " + percolation.numberOfOpenSites());
                 percolation.open(row, col);
             }
             int threshold = n * n / percolation.numberOfOpenSites();
-            System.out.println("percolation threshold: " + threshold);
             thresholds[i] = threshold;
         }
     }
@@ -48,9 +46,9 @@ public class PercolationStats {
     // test client (see below)
     public static void main(String[] args) {
         PercolationStats percolationStats = new PercolationStats(100, 100);
-        System.out.println("percolationStats mean = " + percolationStats.mean());
-        System.out.println("percolationStats confidenceLo = " + percolationStats.confidenceLo());
-        System.out.println("percolationStats confidenceHi = " + percolationStats.confidenceHi());
+        StdOut.println("percolationStats mean = " + percolationStats.mean());
+        StdOut.println("percolationStats confidenceLo = " + percolationStats.confidenceLo());
+        StdOut.println("percolationStats confidenceHi = " + percolationStats.confidenceHi());
     }
 
 }
