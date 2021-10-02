@@ -2,7 +2,7 @@ import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    public static final int TOP_VIRTUAL_SITE_INDEX = 0;
+    private static final int TOP_VIRTUAL_SITE_INDEX = 0;
     private final WeightedQuickUnionUF unionFind;
     private int numberOfOpenSites;
     private final int n;
