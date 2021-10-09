@@ -8,6 +8,7 @@ public class PercolationStats {
 
     // perform independent trials on an n-by-n grid
     public PercolationStats(int n, int trials) {
+        if (n < 1 || trials < 0) throw new IllegalArgumentException("invalid n or trials");
         thresholds = new double[trials];
         this.trials = trials;
         for (int i = 0; i < trials; i++) {
