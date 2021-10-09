@@ -47,10 +47,10 @@ public class PercolationStats {
 
     // test client (see below)
     public static void main(String[] args) {
-        PercolationStats percolationStats = new PercolationStats(100, 100);
-        StdOut.println("percolationStats mean = " + percolationStats.mean());
-        StdOut.println("percolationStats confidenceLo = " + percolationStats.confidenceLo());
-        StdOut.println("percolationStats confidenceHi = " + percolationStats.confidenceHi());
+//        PercolationStats percolationStats = new PercolationStats(100, 100);
+//        StdOut.println("percolationStats mean = " + percolationStats.mean());
+//        StdOut.println("percolationStats confidenceLo = " + percolationStats.confidenceLo());
+//        StdOut.println("percolationStats confidenceHi = " + percolationStats.confidenceHi());
     }
 
 }
