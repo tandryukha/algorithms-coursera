@@ -47,10 +47,13 @@ public class PercolationStats {
 
     // test client (see below)
     public static void main(String[] args) {
-//        PercolationStats percolationStats = new PercolationStats(100, 100);
-//        StdOut.println("percolationStats mean = " + percolationStats.mean());
-//        StdOut.println("percolationStats confidenceLo = " + percolationStats.confidenceLo());
-//        StdOut.println("percolationStats confidenceHi = " + percolationStats.confidenceHi());
+        int n = Integer.parseInt(args[0]);
+        int trials = Integer.parseInt(args[1]);
+        if (n < 1 || trials < 1) throw new IllegalArgumentException("n or trials should be > 0");
+        PercolationStats percolationStats = new PercolationStats(n, trials);
+        StdOut.println("percolationStats mean = " + percolationStats.mean());
+        StdOut.println("percolationStats confidenceLo = " + percolationStats.confidenceLo());
+        StdOut.println("percolationStats confidenceHi = " + percolationStats.confidenceHi());
     }
 
 }
