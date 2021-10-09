@@ -26,36 +26,46 @@ public class Percolation {
     public void open(int row, int col) {
         validate(row, col);
         if (isOpen(row, col)) return;
-        int targetSiteIndex = row * col;
-        int upperSiteIndex = (row - 1) * col;
-        int leftSiteIndex = row * (col - 1);
-        int rightSiteIndex = row * (col + 1);
-        int lowerSiteIndex = (row + 1) * col;
 
-        if (isOpen(row - 1, col)) unionFind.union(targetSiteIndex, upperSiteIndex);
-        if (col > 1 && isOpen(row, col - 1)) unionFind.union(targetSiteIndex, leftSiteIndex);
-        if (col < n && isOpen(row, col + 1)) unionFind.union(targetSiteIndex, rightSiteIndex);
-        if (row < n && isOpen(row + 1, col)) unionFind.union(targetSiteIndex, lowerSiteIndex);
-        if (row == n) unionFind.union(targetSiteIndex, bottomVirtualSiteIndex);
+        if (row == 1 || isOpen(row - 1, col)) union(row, col, row - 1, col);
+        if (col > 1 && isOpen(row, col - 1)) union(row, col, row, col - 1);
+        if (col < n && isOpen(row, col + 1)) union(row, col, row, col + 1);
+        if (row == n || row < n && isOpen(row + 1, col)) union(row, col, row + 1, col);
 
         numberOfOpenSites++;
-        openSites[targetSiteIndex] = true;
+        openSites[getIndex(row, col)] = true;
+    }
+
+    private void union(int row, int col, int otherRow, int otherCol) {
+        unionFind.union(getIndex(row, col), getIndex(otherRow, otherCol));
+    }
+
+    private int getIndex(int row, int col) {
+        if (row < 1) return TOP_VIRTUAL_SITE_INDEX;
+        if (row > n) return bottomVirtualSiteIndex;
+        return (row - 1) * n + col;
     }
 
     private void validate(int row, int col) {
-        if (row < 1 || col < 1) throw new IllegalArgumentException("index should be >0");
+        if (row < 1 || col < 1) throw new IllegalArgumentException("row/col should be >0");
+        if (row > n || col > n) throw new IllegalArgumentException("row/col should be <n");
     }
 
     // is the site (row, col) open?
     public boolean isOpen(int row, int col) {
-//        validate(row, col);
-        return openSites[row * col];
+        validate(row, col);
+        return openSites[getIndex(row, col)];
     }
 
     // is the site (row, col) full?
     public boolean isFull(int row, int col) {
         validate(row, col);
-        return unionFind.find(row * col) == unionFind.find(TOP_VIRTUAL_SITE_INDEX);
+        int topVirtualSiteRow = 0;
+        return find(row, col) == find(topVirtualSiteRow, 1);
+    }
+
+    private int find(int row, int col) {
+        return unionFind.find(getIndex(row, col));
     }
 
     // returns the number of open sites
